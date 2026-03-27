@@ -8,7 +8,7 @@ import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/
 // Configuration
 // ---------------------------------------------------------------------------
 
-const MCP_SERVER_URL = process.env.MCP_SERVER_URL || 'http://localhost:3000/mcp';
+const MCP_SERVER_URL = process.env.MCP_SERVER_URL || `http://localhost:${process.env.PORT || '3000'}/mcp`;
 const MODEL_SIMPLE   = 'claude-haiku-4-5-20251001';
 const MODEL_COMPLEX  = 'claude-sonnet-4-6';
 const MAX_TOOL_ITERATIONS = 10;
