@@ -4,7 +4,9 @@
   "description": "MCP server for Amazon Selling Partner API",
   "main": "index.js",
   "scripts": {
-    "start": "node build/index.js",
+    "start": "concurrently --kill-others-on-fail \"npm run start:mcp\" \"npm run start:slack\"",
+    "start:mcp": "node build/index.js",
+    "start:slack": "node slack-bot.js",
     "dev": "nodemon --watch \"src/**/*.ts\" --exec \"ts-node\" src/index.ts",
     "build": "rimraf ./build && tsc && shx chmod +x build/index.js",
     "test": "jest",
@@ -30,14 +32,19 @@
     "node": ">=16.0.0"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.54.0",
     "@modelcontextprotocol/sdk": "^1.11.2",
+    "@slack/bolt": "^4.4.0",
     "@types/aws4": "^1.11.6",
     "aws4": "^1.13.2",
     "axios": "^1.9.0",
+    "concurrently": "^9.1.2",
     "dotenv": "^16.3.1",
+    "express": "^4.21.2",
     "zod": "^3.24.4"
   },
   "devDependencies": {
+    "@types/express": "^5.0.1",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.15.17",
     "@typescript-eslint/eslint-plugin": "^8.32.1",
